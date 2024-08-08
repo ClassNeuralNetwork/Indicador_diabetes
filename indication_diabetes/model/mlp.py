@@ -7,9 +7,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.callbacks import EarlyStopping
 
-x_treino_padrao = 
-saida_treino = 
-
+x_treino_padrao = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_balanced.csv')
+saida_treino = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/output_train_balanced.csv')
+x_treino_padrao.info()
 
 # e camada de saída com 2 neurônios (2 classes)
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, mode='min', restore_best_weights=True)
