@@ -1,0 +1,26 @@
+import tensorflow as tf
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelEncoder
+from tensorflow.keras.callbacks import EarlyStopping
+import shap
+
+# load model 
+model = 
+
+# load data 
+x_test_padrao = 
+
+lista = 
+
+
+classes = 
+
+explainer  = shap.KernelExplainer(model.predict, x_test_padrao)
+shap_values = explainer.shap_values(x_test_padrao)
+
+shap.summary_plot(shap_values,x_test_padrao,feature_names=lista)
+shap.summary_plot(shap_values,x_test_padrao, plot_type="bar" ,feature_names=lista, class_names=classes)
