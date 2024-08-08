@@ -8,5 +8,5 @@ sm = SMOTE(random_state=42)
 input_train_balanced, output_train_balanced = sm.fit_resample(input_train, output_train)
 
 print(output_train_balanced.value_counts())
-input_train_balanced.to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_balanced.csv', index=False)
+input_train_balanced.to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_balanced.csv', index=False, header=input_train.columns)
 output_train_balanced.to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/output_train_balanced.csv', index=False)
