@@ -22,4 +22,4 @@ output_train = pd.DataFrame(output_train)
 output_train.to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/output_train.csv', index=False)
 
 output_test = pd.DataFrame(output_test)
-output_train.to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/output_test.csv', index=False)
+output_test.to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/output_test.csv', index=False)
