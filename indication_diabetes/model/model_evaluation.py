@@ -20,8 +20,15 @@ model = tf.keras.models.load_model('/home/brunopaiva/DataSet/Indicador_diabetes/
 saida_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/output_test.csv')
 x_test_padrao = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_standard.csv')
 
+# Normalizando conforme foi feito no treinamento
+input_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test.csv')
+scaler = StandardScaler()
+input_test_scaled = scaler.fit_transform(input_test)
+
+# x_test_padrao = x_test_padrao.iloc[:, :21]
+
 #Ajuste para o número correto de features
-x_test_padrao = x_test_padrao.iloc[:, :21] 
+# x_test_padrao = x_test_padrao.iloc[:, :21] 
 
 #Carregando o custo
 history = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/custo.csv')
@@ -38,15 +45,19 @@ plt.grid()
 plt.show()
 
 #Previsões no conjunto de teste
-output_model_ = model.predict(x_test_padrao)
+output_model_ = model.predict(input_test_scaled)
 # y_test_class = saida_test.values
 
 output_model_ = (output_model_ >= 0.5).astype(int)
 
+print(saida_test.shape)
+print(output_model_.shape)
+
+
 #Métricas de avaliação
-mse = mean_squared_error(saida_test, x_test_padrao)
-mae = mean_absolute_error(saida_test, x_test_padrao)
-r2 = r2_score(saida_test, x_test_padrao)
+mse = mean_squared_error(saida_test, output_model_)
+mae = mean_absolute_error(saida_test, output_model_)
+r2 = r2_score(saida_test, output_model_)
 
 for i in range(len(output_model_)):
     if(output_model_[i]>= 0.5):

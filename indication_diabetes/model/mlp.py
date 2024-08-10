@@ -35,15 +35,17 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=10, mode='min', rest
 model = tf.keras.models.Sequential()
 # model.add(tf.keras.layers.Dense(500, input_dim=21, kernel_regularizer=tf.keras.regularizers.L2(0.01), activation='sigmoid', name='oculta'))
 # model.add(tf.keras.layers.Dropout(0.2))
-model.add(tf.keras.layers.Dense(256, activation='relu', input_shape=(21,)))
+model.add(tf.keras.layers.Dense(256, activation='relu', input_shape=(input_train_scaled.shape[1],)))
 model.add(tf.keras.layers.Dropout(0.1))
 # Camada oculta 2 com 400 neurônios
 model.add(tf.keras.layers.Dense(128, activation='relu'))
 model.add(tf.keras.layers.Dropout(0.1))
 # Camada oculta 3 com 300 neurônios
 model.add(tf.keras.layers.Dense(64, activation='relu'))
+model.add(tf.keras.layers.Dropout(0.1))
 
 model.add(tf.keras.layers.Dense(32, activation='relu'))
+model.add(tf.keras.layers.Dropout(0.1))
 
 # Camada de saída (exemplo para classificação binária)
 # model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
