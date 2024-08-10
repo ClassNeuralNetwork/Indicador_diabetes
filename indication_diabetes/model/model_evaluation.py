@@ -1,8 +1,4 @@
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -11,17 +7,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 # from tensorflow.keras.callbacks import EarlyStopping
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # load model 
 model = tf.keras.models.load_model('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/model.keras')
 
 # load data
 saida_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/output_test.csv')
-x_test_padrao = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_standard.csv')
+input_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test.csv')
 
 # Normalizando conforme foi feito no treinamento
-input_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test.csv')
 scaler = StandardScaler()
 input_test_scaled = scaler.fit_transform(input_test)
 
@@ -54,11 +48,6 @@ print(saida_test.shape)
 print(output_model_.shape)
 
 
-#Métricas de avaliação
-mse = mean_squared_error(saida_test, output_model_)
-mae = mean_absolute_error(saida_test, output_model_)
-r2 = r2_score(saida_test, output_model_)
-
 for i in range(len(output_model_)):
     if(output_model_[i]>= 0.5):
       output_model_[i] = 1
@@ -66,6 +55,8 @@ for i in range(len(output_model_)):
       output_model_[i] = 0
 print(output_model_)
 
+saida_test = saida_test.values.reshape(-1, 1)  # Ajustar para ser uma coluna
+output_model_ = output_model_.reshape(-1, 1)  # Ajustar para ser uma coluna
 
 print('Acurácia:', accuracy_score(saida_test, output_model_))
 print('Precisão:', precision_score(saida_test, output_model_))
