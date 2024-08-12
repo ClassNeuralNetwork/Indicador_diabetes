@@ -9,12 +9,12 @@ from tensorflow.keras.callbacks import EarlyStopping
 import shap
 
 # load model 
-model = 
+model = tf.keras.models.load_model('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/model.keras')
 
 # load data 
-x_test_padrao = 
+x_test_padrao = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv') 
 
-lista = 
+lista = ['negativo_diabets','positivo_diabets']
 
 
 classes = 
