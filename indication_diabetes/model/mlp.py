@@ -63,5 +63,4 @@ model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 # Train model
 history = model.fit(input_train_scaled, output_train, validation_split=0.2, epochs=50, callbacks=[early_stopping])
 
-
-model.save('model.keras')
+model.save('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/model.keras')

@@ -47,6 +47,8 @@ print(output_model_)
 saida_test = saida_test.values.reshape(-1, 1)  # Ajustar para ser uma coluna
 output_model_ = output_model_.reshape(-1, 1)  # Ajustar para ser uma coluna
 
+# precision = precision_score(y_true, y_pred, zero_division=1)
+
 print('Acurácia:', accuracy_score(saida_test, output_model_))
 print('Precisão:', precision_score(saida_test, output_model_))
 print('Sensibilidade:', recall_score(saida_test, output_model_))
