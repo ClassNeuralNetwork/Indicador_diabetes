@@ -26,8 +26,8 @@ input_test_scaled = scaler.transform(input_test)
 #input_train_standard = pd.DataFrame(input_train_scaled)
 
 #Salvando os dados normalizados
-pd.DataFrame(input_train_scaled).to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_standard.csv')
-pd.DataFrame(input_test_scaled).to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv')
+pd.DataFrame(input_train_scaled).to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/train/input_train_standard.csv', index=False)
+pd.DataFrame(input_test_scaled).to_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv', index=False)
 
 
 # e camada de saída com 2 neurônios (2 classes)
