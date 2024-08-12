@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
-from tensorflow.keras.callbacks import EarlyStopping
+# from tensorflow.keras.callbacks import EarlyStopping
 import shap
 
 # load model 
@@ -16,8 +16,7 @@ x_test_padrao = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indicat
 
 lista = ['negativo_diabets','positivo_diabets']
 
-
-classes = 
+classes = ['Diabetes_binary']
 
 explainer  = shap.KernelExplainer(model.predict, x_test_padrao)
 shap_values = explainer.shap_values(x_test_padrao)
