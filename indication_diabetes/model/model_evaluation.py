@@ -30,10 +30,12 @@ plt.show()
 
 #Previsões no conjunto de teste
 output_model_ = model.predict(input_test)
-# y_test_class = saida_test.values
+y_test_class = saida_test.values
 
 output_model_ = (output_model_ >= 0.5).astype(int)
 
+print(output_model_)
+print("y_test:",y_test_class)
 print(saida_test.shape)
 print(output_model_.shape)
 
@@ -49,12 +51,12 @@ output_model_ = output_model_.reshape(-1, 1)  # Ajustar para ser uma coluna
 
 # precision = precision_score(y_true, y_pred, zero_division=1)
 
-print('Acurácia:', accuracy_score(saida_test, output_model_))
-print('Precisão:', precision_score(saida_test, output_model_))
-print('Sensibilidade:', recall_score(saida_test, output_model_))
-print('F1-Score:', f1_score(saida_test, output_model_))
+print('Acurácia:', accuracy_score(y_test_class, output_model_))
+print('Precisão:', precision_score(y_test_class, output_model_, zero_division= 1.0))
+print('Sensibilidade:', recall_score(y_test_class, output_model_))
+print('F1-Score:', f1_score(y_test_class, output_model_))
 
-cm = confusion_matrix(saida_test, output_model_)
+cm = confusion_matrix(y_test_class, output_model_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
 disp.ax_.set_title('Matriz de confusão')
