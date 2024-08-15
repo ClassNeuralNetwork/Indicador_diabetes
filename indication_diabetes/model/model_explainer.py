@@ -23,3 +23,6 @@ shap_values = explainer.shap_values(x_test_padrao)
 
 shap.summary_plot(shap_values,x_test_padrao,feature_names=lista)
 shap.summary_plot(shap_values,x_test_padrao, plot_type="bar" ,feature_names=lista, class_names=classes)
+
+shap.initjs()
+shap.force_plot(explainer.expected_value, shap_values, x_test_padrao)

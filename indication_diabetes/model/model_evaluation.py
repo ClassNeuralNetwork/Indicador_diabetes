@@ -28,27 +28,25 @@ plt.show()
 output_model_ = model.predict(input_test)
 y_test_class = saida_test.values
 
-output_model_ = (output_model_ >= 0.5).astype(int)
+# output_model_ = (output_model_ >= 0.5).astype(int)
 
 print(output_model_)
 print("y_test:",y_test_class)
 print(saida_test.shape)
 print(output_model_.shape)
 
-# for i in range(len(output_model_)):
-#     if(output_model_[i]>= 0.5):
-#       output_model_[i] = 1
-#     else:
-#       output_model_[i] = 0
-# print(output_model_)
+for i in range(len(output_model_)):
+    if(output_model_[i]>= 0.5):
+      output_model_[i] = 1
+    else:
+      output_model_[i] = 0
+print(output_model_)
 
-saida_test = saida_test.values.reshape(-1, 1)  # Ajustar para ser uma coluna
-output_model_ = output_model_.reshape(-1, 1)  # Ajustar para ser uma coluna
-
-# precision = precision_score(y_true, y_pred, zero_division=1)
+# saida_test = saida_test.values.reshape(-1, 1)  # Ajustar para ser uma coluna
+# output_model_ = output_model_.reshape(-1, 1)  # Ajustar para ser uma coluna
 
 print('Acurácia:', accuracy_score(y_test_class, output_model_))
-print('Precisão:', precision_score(y_test_class, output_model_, zero_division= 1))
+print('Precisão:', precision_score(y_test_class, output_model_))
 print('Sensibilidade:', recall_score(y_test_class, output_model_))
 print('F1-Score:', f1_score(y_test_class, output_model_))
 
