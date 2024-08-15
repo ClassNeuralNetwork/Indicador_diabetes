@@ -1,0 +1,2 @@
+*.csv filter=lfs diff=lfs merge=lfs -text
+indication_diabetes/dataset/train/input_train_standard.csv filter=lfs diff=lfs merge=lfs -text
