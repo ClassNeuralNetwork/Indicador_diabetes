@@ -5,14 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # load model 
-model = tf.keras.models.load_model('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/model.keras')
+model = tf.keras.models.load_model('../Indicador_diabetes/indication_diabetes/model/model.keras')
 
 # load data
-saida_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/output_test.csv')
-input_test = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv')
+saida_test = pd.read_csv('../Indicador_diabetes/indication_diabetes/dataset/test/output_test.csv')
+input_test = pd.read_csv('../Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv')
 
 #Carregando o custo
-history = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/custo.csv')
+history = pd.read_csv('../Indicador_diabetes/indication_diabetes/model/custo.csv')
 
 # Plot training & validation accuracy values
 plt.plot(history['loss'])
@@ -28,12 +28,11 @@ plt.show()
 output_model_ = model.predict(input_test)
 y_test_class = saida_test.values
 
-# output_model_ = (output_model_ >= 0.5).astype(int)
+y_test_class = y_test_class.flatten()
+output_model_ = output_model_.flatten()
 
 print(output_model_)
 print("y_test:",y_test_class)
-print(saida_test.shape)
-print(output_model_.shape)
 
 for i in range(len(output_model_)):
     if(output_model_[i]>= 0.5):
