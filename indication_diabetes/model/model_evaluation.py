@@ -1,6 +1,5 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 import tensorflow as tf
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -32,7 +31,7 @@ y_test_class = y_test_class.flatten()
 output_model_ = output_model_.flatten()
 
 print(output_model_)
-print("y_test:",y_test_class)
+print("y_test:", y_test_class)
 
 for i in range(len(output_model_)):
     if(output_model_[i]>= 0.5):
@@ -41,13 +40,10 @@ for i in range(len(output_model_)):
       output_model_[i] = 0
 print(output_model_)
 
-# saida_test = saida_test.values.reshape(-1, 1)  # Ajustar para ser uma coluna
-# output_model_ = output_model_.reshape(-1, 1)  # Ajustar para ser uma coluna
-
 print('Acurácia:', accuracy_score(y_test_class, output_model_))
-print('Precisão:', precision_score(y_test_class, output_model_))
-print('Sensibilidade:', recall_score(y_test_class, output_model_))
-print('F1-Score:', f1_score(y_test_class, output_model_))
+print('Precisão:', precision_score(y_test_class, output_model_, average='weighted'))
+print('Sensibilidade:', recall_score(y_test_class, output_model_, average='weighted'))
+print('F1-Score:', f1_score(y_test_class, output_model_, average='weighted'))
 
 cm = confusion_matrix(y_test_class, output_model_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)

@@ -9,10 +9,10 @@ from sklearn.preprocessing import LabelEncoder
 import shap
 
 # load model 
-model = tf.keras.models.load_model('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/model/model.keras')
+model = tf.keras.models.load_model('../Indicador_diabetes/indication_diabetes/model/model.keras')
 
 # load data 
-x_test_padrao = pd.read_csv('/home/brunopaiva/DataSet/Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv') 
+x_test_padrao = pd.read_csv('../Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv') 
 
 lista = ['negativo_diabets','positivo_diabets']
 
