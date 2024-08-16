@@ -5,24 +5,32 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
-# from tensorflow.keras.callbacks import EarlyStopping
 import shap
 
-# load model 
+# Carregar o modelo
 model = tf.keras.models.load_model('../Indicador_diabetes/indication_diabetes/model/model.keras')
 
-# load data 
-x_test_padrao = pd.read_csv('../Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv') 
+selected_feature = ['HighBP', 'HighChol', 'CholCheck', 'BMI', 'Smoker', 'Stroke', 'HeartDiseaseorAttack', 
+                    'PhysActivity', 'Fruits', 'Veggies', 'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 
+                    'GenHlth', 'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'age', 'Education', 'Incone']
 
-lista = ['negativo_diabets','positivo_diabets']
+# Carregar dados normalizados
+input_test = pd.read_csv('../Indicador_diabetes/indication_diabetes/dataset/test/input_test_standard.csv', header=0, names=selected_feature)
+input_train = pd.read_csv('../Indicador_diabetes/indication_diabetes/dataset/train/input_train_standard.csv', header=0, names=selected_feature)
 
-classes = ['Diabetes_binary']
+# Usando shap.sample para reduzir o tamanho dos dados de fundo
+background_data = shap.sample(input_test, 100)
 
-explainer  = shap.KernelExplainer(model.predict, x_test_padrao)
-shap_values = explainer.shap_values(x_test_padrao)
+# Criando o KernelExplainer com background_data reduzido
+explainer = shap.KernelExplainer(model.predict, background_data, nsamples=100)
 
-shap.summary_plot(shap_values,x_test_padrao,feature_names=lista)
-shap.summary_plot(shap_values,x_test_padrao, plot_type="bar" ,feature_names=lista, class_names=classes)
+# Calcular os valores de shap para uma amostra de 10 pontos de dados de teste
+shap_values = explainer.shap_values(input_test.iloc[:100])
 
-shap.initjs()
-shap.force_plot(explainer.expected_value, shap_values, x_test_padrao)
+# Plotar o resumo dos valores de shap
+plt.figure()
+shap.summary_plot(shap_values, input_test.iloc[:100], plot_type="bar", feature_names=input_test.columns)
+
+# Plotar o gráfico de dependência
+plt.figure()
+shap.dependence_plot(selected_feature[0], shap_values, input_test.iloc[:100], feature_names=input_test.columns)
