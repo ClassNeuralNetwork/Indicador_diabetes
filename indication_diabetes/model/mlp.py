@@ -31,8 +31,6 @@ model.add(tf.keras.layers.Dropout(0.25))
 model.add(tf.keras.layers.Dense(128, activation='relu'))
 model.add(tf.keras.layers.Dropout(0.1))
 model.add(tf.keras.layers.Dense(64, activation='relu'))
-model.add(tf.keras.layers.Dense(32, activation='relu'))
-
 
 model.add(tf.keras.layers.Dense(1, activation='sigmoid', name='saida'))
 model.summary() #visualizando o modelo
